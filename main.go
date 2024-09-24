@@ -6,6 +6,8 @@ import (
 
 var idxVar = []string{"X", "Y", "Z"}
 
+const PRECISION = 10
+
 // SolveLinearEquation uses Gaussian Elimination to solve Ax = b
 func SolveLinearEquation(A [][]float64, b []float64) ([]float64, error) {
 
@@ -78,6 +80,13 @@ func readInput() ([][]float64, []float64) {
 
 }
 
+func isRound(val float64) bool {
+	tmp := val * PRECISION
+	mod := int(tmp) % PRECISION
+
+	return mod == 0
+}
+
 func showFormatted(A [][]float64, b []float64) {
 	row := len(A)
 	for i := 0; i < row; i++ {
@@ -86,18 +95,31 @@ func showFormatted(A [][]float64, b []float64) {
 			el := A[i][j]
 			if el == 0 {
 				continue
-			} else {
-				isLeading = false
 			}
 
 			if !isLeading {
 				if el > 1 {
-					fmt.Printf("+%.0f", el)
+					if isRound(el) {
+						fmt.Printf("+%.0f", el)
+					} else {
+						fmt.Printf("+%.1f", el)
+					}
 				} else if el < 1 {
+					if isRound(el) {
+						fmt.Printf("%.0f", el)
+					} else {
+						fmt.Printf("%.1f", el)
+					}
+				}
+			} else {
+				if isRound(el) {
 					fmt.Printf("%.0f", el)
+				} else {
+					fmt.Printf("%.1f", el)
 				}
 			}
 
+			isLeading = false
 			fmt.Print(idxVar[j], " ")
 		}
 
@@ -108,7 +130,7 @@ func showFormatted(A [][]float64, b []float64) {
 func printSolution(b []float64) {
 	fmt.Print("Solution: ")
 	for i := 0; i < len(b); i++ {
-		fmt.Printf("%s= %.0f ", idxVar[i], b[i])
+		fmt.Printf("%s= %.1f ", idxVar[i], b[i])
 	}
 	fmt.Println()
 }
