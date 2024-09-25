@@ -1,0 +1,35 @@
+results:
+1. dont print
+2. print + sign
+3. print the number no precision
+4. print the number with precision
+4. print the letter
+
+case number == 0:
+	then dont print
+
+di print apa ngga?
+print tanda apa nggak?
+print nomornya apa nggak?
+print nomornya precision apa nggak?
+print huruf
+
+case position == 1:
+	case -1 < number < 1
+		case number is round
+			print the number with precision
+		print the letter
+	case number < -1 or 1> :
+		print the number no precision
+		print the letter
+	case number == -1 or number == 1
+		print the letter
+case position == 2 :
+	case 0 < number < 1
+		print + sign
+		print the number with precision
+		print the letter
+	case -1 < number < 0
+		print the number with precision
+
+
